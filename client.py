@@ -2,7 +2,7 @@ import argparse
 import json
 import requests
 import sys
-from typing import Dict, Any
+from typing import Dict, List, Any
 
 class APIClient:
     API_VERSION = 'v1'
@@ -23,10 +23,12 @@ class APIClient:
         }
         data = json.dumps(request_args).encode('utf8')
 
-        r = requests.get(
+        r = requests.request(
+            'GET',
             uri,
             headers=headers,
             data=data,
+            allow_redirects=False,
         )
 
         if r.headers['content-type'] != 'application/json; charset=utf-8':
@@ -59,6 +61,25 @@ class APIClient:
         print('Server admin email: {}'.format(resp['email']))
         print('Server supported versions: {}'.format(', '.join(resp['versions'])))
 
+    def record_exchange(self, game: str, version: str, idtype: str, ids: List[str]) -> None:
+        if idtype not in ['card', 'song', 'server']:
+            raise Exception('Invalid ID type provided!')
+        if idtype == 'card' and len(ids)== 0:
+            raise Exception('Invalid number of IDs given!')
+        if idtype == 'song' and len(ids) not in [1, 2]:
+            raise Exception('Invalid number of IDs given!')
+        if idtype == 'server' and len(ids) != 0:
+            raise Exception('Invalid number of IDs given!')
+        resp = self.exchange_data(
+            '{}/{}/{}'.format(self.API_VERSION, game, version),
+            {
+                'ids': ids,
+                'type': idtype,
+                'objects': ['records'],
+            },
+        )
+        print(json.dumps(resp['records'], indent=4))
+
 def main():
     # Global arguments
     parser = argparse.ArgumentParser(description='A sample API client for an e-AMUSEMENT API provider.')
@@ -69,11 +90,25 @@ def main():
     # Info request
     info_parser = subparser.add_parser('info')
 
+    # Score request
+    record_parser = subparser.add_parser('records')
+    record_parser.add_argument('-g', '--game', type=str, required=True, help='The game we want to look records up for.')
+    record_parser.add_argument('-v', '--version', type=str, required=True, help='The version we want to look records up for.')
+    record_parser.add_argument('-t', '--type', type=str, required=True, choices=['card', 'song', 'server'], help='The type of ID used to look up records.')
+    record_parser.add_argument('id', metavar='ID', nargs='*', type=str, help='The ID we will look up records for.')
+
     # Grab args
     args = parser.parse_args()
     client = APIClient(args.base, args.token)
     if args.request == 'info':
         client.info_exchange()
+    elif args.request == 'records':
+        client.record_exchange(
+            args.game,
+            args.version,
+            args.type,
+            args.id,
+        )
     else:
         raise Exception('Invalid request type {}!'.format(args.request))
 
