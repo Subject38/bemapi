@@ -46,9 +46,9 @@ class APIClient:
         if r.status_code == 401:
             raise Exception('The API token used is not authorized against this server!')
         if r.status_code == 404:
-            raise Exception('The server does not support this game/version or request object!')
+            raise Exception('The server does not support this game/version or request object and returned \'{}\''.format(error))
         if r.status_code == 405:
-            raise Exception('The server did not recognize the request!')
+            raise Exception('The server did not recognize the request and returned \'{}\''.format(error))
         if r.status_code == 500:
             raise Exception('The server had an error processing the request and returned \'{}\''.format(error))
         if r.status_code == 501:
