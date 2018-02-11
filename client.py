@@ -61,7 +61,7 @@ class APIClient:
         print('Server admin email: {}'.format(resp['email']))
         print('Server supported versions: {}'.format(', '.join(resp['versions'])))
 
-    def record_exchange(self, game: str, version: str, idtype: str, ids: List[str]) -> None:
+    def __id_check(self, idtype: str, ids: List[str]) -> None:
         if idtype not in ['card', 'song', 'server']:
             raise Exception('Invalid ID type provided!')
         if idtype == 'card' and len(ids)== 0:
@@ -70,6 +70,9 @@ class APIClient:
             raise Exception('Invalid number of IDs given!')
         if idtype == 'server' and len(ids) != 0:
             raise Exception('Invalid number of IDs given!')
+
+    def records_exchange(self, game: str, version: str, idtype: str, ids: List[str]) -> None:
+        self.__id_check(idtype, ids)
         resp = self.exchange_data(
             '{}/{}/{}'.format(self.API_VERSION, game, version),
             {
@@ -79,6 +82,18 @@ class APIClient:
             },
         )
         print(json.dumps(resp['records'], indent=4))
+
+    def profile_exchange(self, game: str, version: str, idtype: str, ids: List[str]) -> None:
+        self.__id_check(idtype, ids)
+        resp = self.exchange_data(
+            '{}/{}/{}'.format(self.API_VERSION, game, version),
+            {
+                'ids': ids,
+                'type': idtype,
+                'objects': ['profile'],
+            },
+        )
+        print(json.dumps(resp['profile'], indent=4))
 
 def main():
     # Global arguments
@@ -97,13 +112,27 @@ def main():
     record_parser.add_argument('-t', '--type', type=str, required=True, choices=['card', 'song', 'server'], help='The type of ID used to look up records.')
     record_parser.add_argument('id', metavar='ID', nargs='*', type=str, help='The ID we will look up records for.')
 
+    # Profile request
+    profile_parser = subparser.add_parser('profile')
+    profile_parser.add_argument('-g', '--game', type=str, required=True, help='The game we want to look profiles up for.')
+    profile_parser.add_argument('-v', '--version', type=str, required=True, help='The version we want to look profiles up for.')
+    profile_parser.add_argument('-t', '--type', type=str, required=True, choices=['card', 'server'], help='The type of ID used to look up profiles.')
+    profile_parser.add_argument('id', metavar='ID', nargs='*', type=str, help='The ID we will look up profiles for.')
+
     # Grab args
     args = parser.parse_args()
     client = APIClient(args.base, args.token)
     if args.request == 'info':
         client.info_exchange()
     elif args.request == 'records':
-        client.record_exchange(
+        client.records_exchange(
+            args.game,
+            args.version,
+            args.type,
+            args.id,
+        )
+    elif args.request == 'profile':
+        client.profile_exchange(
             args.game,
             args.version,
             args.type,
