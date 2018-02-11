@@ -44,7 +44,7 @@ class APIClient:
         error = jsondata['error']
 
         if r.status_code == 401:
-            raise Exception('The API token used is not authorized against this server!')
+            raise Exception('The API token used is not authorized against the server!')
         if r.status_code == 404:
             raise Exception('The server does not support this game/version or request object and returned \'{}\''.format(error))
         if r.status_code == 405:
