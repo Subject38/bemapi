@@ -242,287 +242,181 @@ Given that a high score, once set, is immutable, records are easily cached on th
 
 Valid charts for DDR according to the game are as follows:
 
-* 0 – Single beginner
-
-* 1 – Single basic
-
-* 2 – Single difficult
-
-* 3 – Single expert
-
-* 4 – Single challenge
-
-* 5 – Double basic
-
-* 6 – Double difficult
-
-* 7 – Double expert
-
-* 8 – Double challenge
+* ``0`` – Single beginner
+* ``1`` – Single basic
+* ``2`` – Single difficult
+* ``3`` – Single expert
+* ``4`` – Single challenge
+* ``5`` – Double basic
+* ``6`` – Double difficult
+* ``7`` – Double expert
+* ``8`` – Double challenge
 
 The following attribute should be returned (if available) for records belonging to the DDR series.
 
-* rank – The letter grade ranking that the user has earned, as a string enum. Should be one of the following values: "AAA", "AA+", "AA", "AA-", "A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D", "E".
-
-* halo – The combo halo that the user has earned, as a string enum. Should be one of the following values:
-
-    * none – The user did not earn a halo (no combo).
-
-    * gfc – Good full combo.
-
-    * fc – Great full combo.
-
-    * pfc – Perfect full combo.
-
-    * mfc – Marvelous full combo.
-
-* combo – An integer specifying the maximum combo earned.
-
-* ghost - List of integers representing the integers that the game sends for ghost steps for a song. Note that DDR A changes this format to be a string of single digit integers, so a transformation will need to be done to fulfill this. Note that ghost steps should not be considered compatible across versions of DDR for this reason.
+* ``rank`` – The letter grade ranking that the user has earned, as a string enum. Should be one of the following values: "AAA", "AA+", "AA", "AA-", "A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D", "E".
+* ``halo`` – The combo halo that the user has earned, as a string enum. Should be one of the following values:
+    * ``none`` – The user did not earn a halo (no combo).
+    * ``gfc`` – Good full combo.
+    * ``fc`` – Great full combo.
+    * ``pfc`` – Perfect full combo.
+    * ``mfc`` – Marvelous full combo.
+* ``combo`` – An integer specifying the maximum combo earned.
+* ``ghost`` - List of integers representing the integers that the game sends for ghost steps for a song. Note that DDR A changes this format to be a string of single digit integers, so a transformation will need to be done to fulfill this. Note that ghost steps should not be considered compatible across versions of DDR for this reason.
 
 ### IIDX Additional Attributes and Documentation
 
 Valid charts for IIDX according to the game are as follows:
 
-* 0 – Normal 7key
+* ``0`` – Normal 7key
+* ``1`` – Hyper 7key
+* ``2`` – Another 7key
+* ``3`` – Normal 14key
+* ``4`` – Hyper 14key
+* ``5`` – Another 14key
+* ``6`` – Beginner 7key
 
-* 1 – Hyper 7key
+Note that in the case of IIDX, "points" above refers to the EX score earned on the song. This is calculated as 2 ✕ pgreats + greats. The following attributes should be returned (if available) for records belonging to the IIDX series.
 
-* 2 – Another 7key
-
-* 3 – Normal 14key
-
-* 4 – Hyper 14key
-
-* 5 – Another 14key
-
-* 6 – Beginner 7key
-
-Note that in the case of IIDX, "points" above refers to the EX score earned on the song. This is calculated as 2*pgreats + greats. The following attributes should be returned (if available) for records belonging to the IIDX series.
-
-* status – String enum representing the clear lamp earned on this particular record. Valid values are as follows:
-
-    * np – no play/no clear (such as when earning a record during DAN courses).
-
-    * failed – Failed song.
-
-    * ac – Assist clear.
-
-    * ec – Easy clear.
-
-    * nc – Normal clear.
-
-    * hc – Hard clear.
-
-    * exhc – EX hard clear.
-
-    * fc – Full combo.
-
-* ghost – List of integers in the range of 0-255, representing the bytes that the game sends for ghost steps for a song.
-
-* miss – The miss count, as an integer number of misses recorded for this record. If the miss count is not available for this song (such as the user failed out early), this should be -1. Otherwise, the valid range goes from 0 to the number of notes in the chart.
+* ``status`` – String enum representing the clear lamp earned on this particular record. Valid values are as follows:
+    * ``np`` – no play/no clear (such as when earning a record during DAN courses).
+    * ``failed`` – Failed song.
+    * ``ac`` – Assist clear.
+    * ``ec`` – Easy clear.
+    * ``nc`` – Normal clear.
+    * ``hc`` – Hard clear.
+    * ``exhc`` – EX hard clear.
+    * ``fc`` – Full combo.
+* ``ghost`` – List of integers in the range of 0-255, representing the bytes that the game sends for ghost steps for a song.
+* ``miss`` – The miss count, as an integer number of misses recorded for this record. If the miss count is not available for this song (such as the user failed out early), this should be -1. Otherwise, the valid range goes from 0 to the number of notes in the chart.
 
 ### Jubeat Additional Attributes and Documentation
 
 Valid charts for Jubeat according to the game are as follows:
 
-* 0 – Basic
-
-* 1 – Advanced
-
-* 2 – Extreme
+* ``0`` – Basic
+* ``1`` – Advanced
+* ``2`` – Extreme
 
 The following attributes should be returned (if available) for records belonging to the Jubeat series.
 
-* status – The clear medal earned by the user for this record, as a string enum. Valid values are as follows:
-
-    * failed – The user failed the song.
-
-    * cleared – The user cleared the song with no combo.
-
-    * nfc – Nearly full combo. The user got almost a full combo.
-
-    * fc – Full combo.
-
-    * nec – Nearly excellent combo. The user got close to perfect on each note.
-
-    * ec – Excellent combo. The user earned an excellent on every note.
-
-* combo – Integer specifying the maximum combo earned when the user earned the record.
-
-* ghost – List of integers representing the ghost data sent by the game for this record.
+* ``status`` – The clear medal earned by the user for this record, as a string enum. Valid values are as follows:
+    * ``failed`` – The user failed the song.
+    * ``cleared`` – The user cleared the song with no combo.
+    * ``nfc`` – Nearly full combo. The user got almost a full combo.
+    * ``fc`` – Full combo.
+    * ``nec`` – Nearly excellent combo. The user got close to perfect on each note.
+    * ``ec`` – Excellent combo. The user earned an excellent on every note.
+* ``combo`` – Integer specifying the maximum combo earned when the user earned the record.
+* ``ghost`` – List of integers representing the ghost data sent by the game for this record.
 
 ### Museca Additional Attribute and Documentation
 
 The following chart types are recognized by Museca according to the game:
 
-* 0 – Green chart.
-
-* 1 – Orange chart.
-
-* 2 – Red chart.
+* ``0`` – Green chart.
+* ``1`` – Orange chart.
+* ``2`` – Red chart.
 
 The following attributes should be returned (if available) for all records belonging to the Museca series:
 
-* status – String enum representing the clear status of this record. Valid values are as follows:
-
-    * failed – The user failed the song for this record.
-
-    * cleared – The user cleared the song for this record.
-
-    * fc – The user earned a full combo for this record.
-
-* rank – String enum representing the ranking earned during this record. Valid values are as follows. Note that these correspond one-to-one with the kanji rank displayed in the UI, so they are reproduced below to avoid translation errors:
-
-    * death - 没
-
-    * poor - 拙
-
-    * mediocre - 凡
-
-    * good - 佳
-
-    * great - 良
-
-    * excellent - 優
-
-    * superb - 秀
-
-    * masterpiece - 傑
-
-    * perfect - 傑 (Identical to superb kanji but shows up gold in-game).
-
-* combo  - The maximum combo earned when earning this record as an integer.
-
-* buttonrate – The integer button rate according to the game when this score was recorded.
-
-* longrate – The integer hold rate according to the game when this score was recorded.
-
-* volrate – The integer spin rate according to the game when this score was recorded.
+* ``status`` – String enum representing the clear status of this record. Valid values are as follows:
+    * ``failed`` – The user failed the song for this record.
+    * ``cleared`` – The user cleared the song for this record.
+    * ``fc`` – The user earned a full combo for this record.
+* ``rank`` – String enum representing the ranking earned during this record. Valid values are as follows. Note that these correspond one-to-one with the kanji rank displayed in the UI, so they are reproduced below to avoid translation errors:
+    * ``death`` - 没
+    * ``poor`` - 拙
+    * ``mediocre`` - 凡
+    * ``good`` - 佳
+    * ``great`` - 良
+    * ``excellent`` - 優
+    * ``superb`` - 秀
+    * ``masterpiece`` - 傑
+    * ``perfect`` - 傑 (Identical to superb kanji but shows up gold in-game).
+* ``combo`` - The maximum combo earned when earning this record as an integer.
+* ``buttonrate`` – The integer button rate according to the game when this score was recorded.
+* ``longrate`` – The integer hold rate according to the game when this score was recorded.
+* ``volrate`` – The integer spin rate according to the game when this score was recorded.
 
 ### Pop’n Music Additional Attributes and Documentation
 
 The following chart types are recognized by Pop’n Music Fantasia and above:
 
-* 0 – Easy chart
-
-* 1 – Normal chart
-
-* 2 – Hyper chart
-
-* 3 – EX chart
+* ``0`` – Easy chart
+* ``1`` – Normal chart
+* ``2`` – Hyper chart
+* ``3`` – EX chart
 
 Pop’n Music Tune Street only had ‘cool’ timing for a particular mode (Cho Challenge mode), and thus only those scores are compatible going forward. The charts that were available in this mode are the "normal", "hyper" and "EX" chart types. Easy charts were not available, so scores should not be loaded for easy charts for Tune Street.
 
 The following attributes should be returned (if available) for records belonging to the Pop’n Music series:
 
-* status – The clear status when this record was earned, as a string enum. Valid values are as follows:
-
-    * cf – Failed, circle marker.
-
-    * df – Failed, diamond marker.
-
-    * sf – Failed, star marker.
-
-    * ec – Easy cleared.
-
-    * cc – Cleared, circle marker.
-
-    * dc – Cleared, diamond marker.
-
-    * sc – Cleared, star marker.
-
-    * cfc – Full combo cleared, circle marker.
-
-    * dfc – Full combo cleared, diamond marker.
-
-    * sfc – Full combo cleared, star marker.
-
-    * p – Perfect full combo cleared.
-
-* combo – Integer specifying the maximum combo earned when this record was stored.
+* ``status`` – The clear status when this record was earned, as a string enum. Valid values are as follows:
+    * ``cf`` – Failed, circle marker.
+    * ``df`` – Failed, diamond marker.
+    * ``sf`` – Failed, star marker.
+    * ``ec`` – Easy cleared.
+    * ``cc`` – Cleared, circle marker.
+    * ``dc`` – Cleared, diamond marker.
+    * ``sc`` – Cleared, star marker.
+    * ``cfc`` – Full combo cleared, circle marker.
+    * ``dfc`` – Full combo cleared, diamond marker.
+    * ``sfc`` – Full combo cleared, star marker.
+    * ``p`` – Perfect full combo cleared.
+* ``combo`` – Integer specifying the maximum combo earned when this record was stored.
 
 ### Reflec Beat Additional Attributes and Documentation
 
 The following charts are recognized by Reflec Beat series. Note that special/white hard charts do not appear at all in some older series, so they shouldn’t be returned when requesting records for older games.
 
-* 0 – Basic
-
-* 1 – Medium
-
-* 2 – Hard
-
-* 3 – Special/White Hard
+* ``0`` – Basic
+* ``1`` – Medium
+* ``2`` – Hard
+* ``3`` – Special/White Hard
 
 Note that the game went through a complete redesign between Volzza 2 and Reflesia, and thus scores are not compatible across this boundary in either direction.
 
 The following attributes should be returned (if available) for any record belonging to the Reflec Beat series:
 
-* rate – Achievement rate of this record. This should be an integer value where 0 is 0% and 10000 is 100% achievement rate. Essentially, it is the achievement rate percentage multiplied by 100.
-
-* status – Clear status according to the game as a string enum. Note that some versions conflate clear status and combo type, so some separating and combining might need to be done depending on how a network decides to store attributes. Valid values are as follows:
-
-    * np – No play. Similar to IIDX, where the record was earned in a mode that does not credit the user for playing the song.
-
-    * failed – The user failed the song for this record.
-
-    * cleared – The user cleared this song for this record.
-
-    * hc – The user hard cleared this song.
-
-    * shc – The user S hard cleared the song.
-
-* halo – The combo status that was achieved when earning this record, as a string enum. Valid values are as follows:
-
-    * none – The user did not earn any combo marker during this record.
-
-    * ac – Almost combo. The user was close to a full combo but missed by up to two.
-
-    * fc – Full combo.
-
-    * fcaj – Full combo all just reflec. The user was able to full combo the song, and on top of that execute the maximum number of just reflecs available in the song.
-
-* miss – The miss count earned during this song, as an integer. If this is not available (the user earned this song in a mode that doesn’t count misses, for instance), this should be set to -1.
-
-* combo – The combo earned during this song as an integer.
+* ``rate`` – Achievement rate of this record. This should be an integer value where 0 is 0% and 10000 is 100% achievement rate. Essentially, it is the achievement rate percentage multiplied by 100.
+* ``status`` – Clear status according to the game as a string enum. Note that some versions conflate clear status and combo type, so some separating and combining might need to be done depending on how a network decides to store attributes. Valid values are as follows:
+    * ``np`` – No play. Similar to IIDX, where the record was earned in a mode that does not credit the user for playing the song.
+    * ``failed`` – The user failed the song for this record.
+    * ``cleared`` – The user cleared this song for this record.
+    * ``hc`` – The user hard cleared this song.
+    * ``shc`` – The user S hard cleared the song.
+* ``halo`` – The combo status that was achieved when earning this record, as a string enum. Valid values are as follows:
+    * ``none`` – The user did not earn any combo marker during this record.
+    * ``ac`` – Almost combo. The user was close to a full combo but missed by up to two.
+    * ``fc`` – Full combo.
+    * ``fcaj`` – Full combo all just reflec. The user was able to full combo the song, and on top of that execute the maximum number of just reflecs available in the song.
+* ``miss`` – The miss count earned during this song, as an integer. If this is not available (the user earned this song in a mode that doesn’t count misses, for instance), this should be set to -1.
+* ``combo`` – The combo earned during this song as an integer.
 
 ### SDVX Additional Attributes and Documentation
 
 The following chart types are recognized by SDVX according to the game:
 
-* 0 – Novice
-
-* 1 – Advanced
-
-* 2 – Exhaust
-
-* 3 – Infinite
-
-* 4 – Maximum
+* ``0`` – Novice
+* ``1`` – Advanced
+* ``2`` – Exhaust
+* ``3`` – Infinite
+* ``4`` – Maximum
 
 The following attributes should be returned (if available) by all records belonging to the SDVX series.
 
-* status – The clear status of this record, as a string enum. Valid values are as follows:
-
-    * np – No play/no clear, such as when playing during a mode that does not give you credit for clears but still saves scores (such as skill analyzer).
-
-    * cleared – User cleared the chart for this record.
-
-    * hc - User hard cleared the chart for this record.
-
-    * uc – User full combo’d the chart (ultimate chain) for this record.
-
-    * puc – User perfected the chart (perfect ultimate chain) for this record.
-
-* rank – The clear rank that was earned by the user for this record, as a string enum. Valid values are as follows: "E" (failed, no play), "D", "C", "B", "A", "A+", "AA", "AA+", "AAA", "AAA+" and "S".
-
-* combo – The maximum combo earned by the user for this record as an integer.
-
-* buttonrate – The integer button rate according to the game when this score was recorded.
-
-* longrate – The integer hold rate according to the game when this score was recorded.
-
-* volrate – The integer knob volume rate according to the game when this score was recorded.
+* ``status`` – The clear status of this record, as a string enum. Valid values are as follows:
+    * ``np`` – No play/no clear, such as when playing during a mode that does not give you credit for clears but still saves scores (such as skill analyzer).
+    * ``cleared`` – User cleared the chart for this record.
+    * ``hc`` - User hard cleared the chart for this record.
+    * ``uc`` – User full combo’d the chart (ultimate chain) for this record.
+    * ``puc`` – User perfected the chart (perfect ultimate chain) for this record.
+* ``rank`` – The clear rank that was earned by the user for this record, as a string enum. Valid values are as follows: "E" (failed, no play), "D", "C", "B", "A", "A+", "AA", "AA+", "AAA", "AAA+" and "S".
+* ``combo`` – The maximum combo earned by the user for this record as an integer.
+* ``buttonrate`` – The integer button rate according to the game when this score was recorded.
+* ``longrate`` – The integer hold rate according to the game when this score was recorded.
+* ``volrate`` – The integer knob volume rate according to the game when this score was recorded.
 
 ## Profile
 
@@ -530,13 +424,8 @@ Identified by the "profile" object type, this pulls up basic profile information
 
 The profile request isn’t currently meant to allow instantiation of full game profiles across different networks. Instead, it is provided as a way to look up in-game name and statistic information based on card ID so networks can present global scores if desired. Given the amount of information in the profile return for each user, a server may also wish to present to the user a profile migration screen as if the user was coming from an older version of the game. In this way, the name on the profile can be pre-filled from another network as a convenience. The response to the profile request should be a JSON object with a "profile" attribute. The "profile" attribute should be a list of zero or more profile objects that fit the criteria of the object type. Each profile object should have the following attributes at minimum:
 
-* card – The 16 character card ID identifying this user as a string. In the case that a user has multiple cards associated with an account, the card ID used to request this user’s profile should be returned.
-
-* name – The name associated with the profile, as a string.
-
-* registered – The integer UTC unix timestamp of profile registration. If unavailable, this should be set to -1.
-
-* updated – The integer UTC unix timestamp of the last profile update. If unavailable, this should be set to -1.
-
-* plays – The integer total number of plays this user has logged using this profile.
-
+* ``card`` – The 16 character card ID identifying this user as a string. In the case that a user has multiple cards associated with an account, the card ID used to request this user’s profile should be returned.
+* ``name`` – The name associated with the profile, as a string.
+* ``registered`` – The integer UTC unix timestamp of profile registration. If unavailable, this should be set to -1.
+* ``updated`` – The integer UTC unix timestamp of the last profile update. If unavailable, this should be set to -1.
+* ``plays`` – The integer total number of plays this user has logged using this profile.
