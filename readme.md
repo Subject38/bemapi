@@ -65,11 +65,9 @@ Each request should have a JSON object that specifies the "ids", "type" and "obj
 
 The following ID types are supported for retrieving various objects from a remote server.
 
-* card - 16 character hex string as found when using a slotted or wavepass reader to read an eAmusement card. A client can request a list of one or more card IDs, and the response should include all information for that object type for each card IDs. In most cases, an empty response for card IDs that do not exist on the server being queried is sufficient.
-
-* song - A game identifier for a particular song (usually an integer when talking to a game). In many cases this only makes sense in the context of a game/version so be sure to take all three into account when looking up objects by song. Optionally, a second value in the list can be provided specifying the chart for a song. Note that while these are normally integers, they should be passed to the server as strings. Unlike ‘card’ lookups, this only allows looking up by one song or song/chart object at a time.
-
-* server - No ID necessary, fetches all instances of a particular object on the server for a given game/version. An empty list should be given to the "ids" parameter.
+* ``card`` - 16 character hex string as found when using a slotted or wavepass reader to read an eAmusement card. A client can request a list of one or more card IDs, and the response should include all information for that object type for each card IDs. In most cases, an empty response for card IDs that do not exist on the server being queried is sufficient.
+* ``song`` - A game identifier for a particular song (usually an integer when talking to a game). In many cases this only makes sense in the context of a game/version so be sure to take all three into account when looking up objects by song. Optionally, a second value in the list can be provided specifying the chart for a song. Note that while these are normally integers, they should be passed to the server as strings. Unlike ‘card’ lookups, this only allows looking up by one song or song/chart object at a time.
+* ``server`` - No ID necessary, fetches all instances of a particular object on the server for a given game/version. An empty list should be given to the "ids" parameter.
 
 On successful lookup, the response JSON object will have an attribute for each requested object type, named after that object request. The value of each attribute will depend on what's being looked up but could be a list (in the case of looking up records, for example) or a JSON object itself. Valid responses for each object type will be documented below in the Supported Objects section.
 
@@ -77,61 +75,52 @@ An example request for profile and records based on a card is as follows:
 
 **Request**
 
-GET /v1/iidx/24 HTTP/1.1
+    GET /v1/iidx/24 HTTP/1.1
+    Authorization: Token deadbeef
+    Content-Type: application/json; charset=utf-8
 
-Authorization: Token deadbeef 
-
-Content-Type: application/json; charset=utf-8
-
-{"ids":["E0040000DEADBEEF"],"type":"card","objects":["profile","records"]}
+    {"ids":["E0040000DEADBEEF"],"type":"card","objects":["profile","records"]}
 
 **Response**
 
-HTTP/1.1 200 OK
+    HTTP/1.1 200 OK
+    Content-Type: application/json; charset=utf-8
 
-Content-Type: application/json; charset=utf-8
-
-{"profile":[],"records":[]}
+    {"profile":[],"records":[]}
 
 An example request for records based on a particular song/chart is as follows:
 
 **Request**
 
-GET /v1/iidx/24 HTTP/1.1
+    GET /v1/iidx/24 HTTP/1.1
+    Authorization: Token deadbeef
+    Content-Type: application/json; charset=utf-8
 
-Authorization: Token deadbeef
-
-Content-Type: application/json; charset=utf-8
-
-{"ids":["1001", "1"],"type":"song","objects":["records"]}
+    {"ids":["1001", "1"],"type":"song","objects":["records"]}
 
 **Response**
 
-HTTP/1.1 200 OK
+    HTTP/1.1 200 OK
+    Content-Type: application/json; charset=utf-8
 
-Content-Type: application/json; charset=utf-8
-
-{"records":[]}
+    {"records":[]}
 
 An example request for all records on the server for a game/series is as follows:
 
 **Request**
 
-GET /v1/iidx/24 HTTP/1.1
+    GET /v1/iidx/24 HTTP/1.1
+    Authorization: Token deadbeef
+    Content-Type: application/json; charset=utf-8
 
-Authorization: Token deadbeef
-
-Content-Type: application/json; charset=utf-8
-
-{"ids":[],"type":"server","objects":["records"]}
+    {"ids":[],"type":"server","objects":["records"]}
 
 **Response**
 
-HTTP/1.1 200 OK
+    HTTP/1.1 200 OK
+    Content-Type: application/json; charset=utf-8
 
-Content-Type: application/json; charset=utf-8
-
-{"records":[]}
+    {"records":[]}
 
 ## Supported Games
 
