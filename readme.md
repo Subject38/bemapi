@@ -127,7 +127,7 @@ An example request for all records on the server for a game/series is as follows
 Valid game series and their versions are as follows. Clients and servers should use the following game/version combinations to identify the objects being requested.
 
 * ``beatstream``
-    * ``1` - BeatStream
+    * ``1`` - BeatStream
     * ``2`` - BeatStream アニムトライヴ
 * ``danceevolution``
     * ``1`` - DanceEvolution
