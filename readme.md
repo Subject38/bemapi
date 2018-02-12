@@ -126,151 +126,79 @@ An example request for all records on the server for a game/series is as follows
 
 Valid game series and their versions are as follows. Clients and servers should use the following game/version combinations to identify the objects being requested.
 
-* beatstream
-
-    * 1 - BeatStream
-
-    * 2 - BeatStream アニムトライヴ
-
-* danceevolution
-
-    * 1 - DanceEvolution
-
-* ddr
-
-    * 9 - DanceDanceRevolution SuperNova
-
-    * 10 - DanceDanceRevolution SuperNova 2
-
-    * 11 - DanceDanceRevolution X
-
-    * 12 - DanceDanceRevolution X2
-
-    * 13 -  DanceDanceRevolution X3 VS 2ndMIX
-
-    * 14 - DanceDanceRevolution 2013
-
-    * 15 - DanceDanceRevolution 2014
-
-    * 16 - DanceDanceRevolution Ace
-
-* drummania
-
+* ``beatstream``
+    * ``1` - BeatStream
+    * ``2`` - BeatStream アニムトライヴ
+* ``danceevolution``
+    * ``1`` - DanceEvolution
+* ``ddr``
+    * ``9`` - DanceDanceRevolution SuperNova
+    * ``10`` - DanceDanceRevolution SuperNova 2
+    * ``11`` - DanceDanceRevolution X
+    * ``12`` - DanceDanceRevolution X2
+    * ``13`` - DanceDanceRevolution X3 VS 2ndMIX
+    * ``14`` - DanceDanceRevolution 2013
+    * ``15`` - DanceDanceRevolution 2014
+    * ``16`` - DanceDanceRevolution Ace
+* ``drummania``
     * TBD, please fill in logical mapping!
-
-* futuretomtom
-
-    * 1 - ミライダガッキ FutureTomTom
-
-* guitarfreaks
-
+* ``futuretomtom``
+    * ``1`` - ミライダガッキ FutureTomTom
+* ``guitarfreaks``
     * TBD, please fill in logical mapping!
-
-* iidx
-
-    * 18 - IIDX 18 Resort Anthem
-
-    * 19 - IIDX 19 Lincle
-
-    * 20 - IIDX 20 Tricoro
-
-    * 21 - IIDX 21 SPADA
-
-    * 22 - IIDX 22 PENDUAL
-
-    * 23 - IIDX 23 copula
-
-    * 24 - IIDX 24 SINOBUZ
-
-    * 25 - IIDX 25 CANNON BALLERS
-
-* jubeat
-
-    * 1 - Jubeat
-
-    * 2 - Jubeat Ripples
-
-    * 2a - Jubeat Ripples Append
-
-    * 3 - Jubeat Knit
-
-    * 3a - Jubeat Knit Append
-
-    * 4 - Jubeat Copious
-
-    * 4a - Jubeat Copious
-
-    * 5 - Jubeat Saucer
-
-    * 5a - Jubeat Saucer Fulfill
-
-    * 6 - Jubeat Prop
-
-    * 7 - Jubeat Qubell
-
-    * 8 - Jubeat Clan
-
-* museca
-
-    * 1 - MUSECA
-
-    * 1p - MUSECA 1+1/2
-
-* nostalgia
-
-    * 1 - ノスタルジア
-
-    * 2 - ノスタルジア FORTE
-
-* popnmusic
-
-    * 19 - Pop’n Music Tune Street
-
-    * 20 - Pop’n Music Fantasia
-
-    * 21 - Pop’n Music Sunny Park
-
-    * 22 - Pop’n Music Lapistoria
-
-    * 23 - Pop’n Music Eclale
-
-    * 24 - Pop’n Music うさぎと猫と少年の夢
-
-* reflecbeat
-
-    * 1 - REFLEC BEAT
-
-    * 2 - REFLEC BEAT limelight
-
-    * 3w - REFLEC BEAT colette -Winter-
-
-    * 3sp - REFLEC BEAT colette -Spring-
-
-    * 3su - REFLEC BEAT colette -Summer-
-
-    * 3a - REFLEC BEAT colette -Autumn-
-
-    * 3as - REFLEC BEAT colette -All Seasons-
-
-    * 4 - REFLEC BEAT groovin’!!
-
-    * 4u - REFLEC BEAT groovin’!! Upper
-
-    * 5 - REFLEC BEAT VOLZZA
-
-    * 6 - REFLEC BEAT VOLZZA 2
-
-    * 7 - REFLEC BEAT 悠久のリフレシア
-
-* soundvoltex
-
-    * 1 - Sound Voltex BOOTH
-
-    * 2 - Sound Voltex II Infinite Infection
-
-    * 3 - Sound Voltex III Gravity Wars
-
-    * 4 - Sound Voltex IV Heavenly Haven
+* ``iidx``
+    * ``18`` - IIDX 18 Resort Anthem
+    * ``19`` - IIDX 19 Lincle
+    * ``20`` - IIDX 20 Tricoro
+    * ``21`` - IIDX 21 SPADA
+    * ``22`` - IIDX 22 PENDUAL
+    * ``23`` - IIDX 23 copula
+    * ``24`` - IIDX 24 SINOBUZ
+    * ``25`` - IIDX 25 CANNON BALLERS
+* ``jubeat``
+    * ``1`` - Jubeat
+    * ``2`` - Jubeat Ripples
+    * ``2a`` - Jubeat Ripples Append
+    * ``3`` - Jubeat Knit
+    * ``3a`` - Jubeat Knit Append
+    * ``4`` - Jubeat Copious
+    * ``4a`` - Jubeat Copious
+    * ``5`` - Jubeat Saucer
+    * ``5a`` - Jubeat Saucer Fulfill
+    * ``6`` - Jubeat Prop
+    * ``7`` - Jubeat Qubell
+    * ``8`` - Jubeat Clan
+* ``museca``
+    * ``1`` - MUSECA
+    * ``1p`` - MUSECA 1+1/2
+* ``nostalgia``
+    * ``1`` - ノスタルジア
+    * ``2`` - ノスタルジア FORTE
+* ``popnmusic``
+    * ``19`` - Pop’n Music Tune Street
+    * ``20`` - Pop’n Music Fantasia
+    * ``21`` - Pop’n Music Sunny Park
+    * ``22`` - Pop’n Music Lapistoria
+    * ``23`` - Pop’n Music Eclale
+    * ``24`` - Pop’n Music うさぎと猫と少年の夢
+* ``reflecbeat``
+    * ``1`` - REFLEC BEAT
+    * ``2`` - REFLEC BEAT limelight
+    * ``3w`` - REFLEC BEAT colette -Winter-
+    * ``3sp`` - REFLEC BEAT colette -Spring-
+    * ``3su`` - REFLEC BEAT colette -Summer-
+    * ``3a`` - REFLEC BEAT colette -Autumn-
+    * ``3as`` - REFLEC BEAT colette -All Seasons-
+    * ``4`` - REFLEC BEAT groovin’!!
+    * ``4u`` - REFLEC BEAT groovin’!! Upper
+    * ``5`` - REFLEC BEAT VOLZZA
+    * ``6`` - REFLEC BEAT VOLZZA 2
+    * ``7`` - REFLEC BEAT 悠久のリフレシア
+* ``soundvoltex``
+    * ``1`` - Sound Voltex BOOTH
+    * ``2`` - Sound Voltex II Infinite Infection
+    * ``3`` - Sound Voltex III Gravity Wars
+    * ``4`` - Sound Voltex IV Heavenly Haven
 
 ## Special URIs
 
