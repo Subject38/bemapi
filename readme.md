@@ -1,4 +1,4 @@
-For the purposes of this specification, the complete API for accessing scores, user data and other information from a remote eAmusement network will be referred to as "the data portability API" or just “the API.” The version of this spec is currently "v1". When specifying attribute names or values, the case-sensitive, valid values will be presented either in “quotes” or in monospace.
+For the purposes of this specification, the complete API for accessing scores, user data and other information from a remote eAmusement network will be referred to as "the data portability API" or just “the API.” The version of this spec is currently "v1". When specifying attribute names or values, the case-sensitive, valid values will be presented either in “quotes” or in ``monospace``.
 
 # Wire Protocol
 
