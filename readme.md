@@ -8,66 +8,53 @@ An example request and response looks as such:
 
 **Request**
 
-GET / HTTP/1.1
+    GET / HTTP/1.1
+    Authorization: Token deadbeef
+    Content-Type: application/json; charset=utf-8
 
-Authorization: Token deadbeef
-
-Content-Type: application/json; charset=utf-8
-
-{}
+    {}
 
 **Response**
 
-HTTP/1.1 200 OK 
+    HTTP/1.1 200 OK
+    Content-Type: application/json; charset=utf-8
 
-Content-Type: application/json; charset=utf-8
-
-{"versions":["v1"],"name":"Test Server"}
+    {"versions":["v1"],"name":"Test Server"}
 
 An example error request and response looks as such:
 
 **Request**
 
-GET /invalid/uri HTTP/1.1
+    GET /invalid/uri HTTP/1.1
+    Authorization: Token deadbeef
+    Content-Type: application/json; charset=utf-8
 
-Authorization: Token deadbeef 
-
-Content-Type: application/json; charset=utf-8
-
-{}
+    {}
 
 **Response**
 
-HTTP/1.1 405 Method Not Allowed
+    HTTP/1.1 405 Method Not Allowed
+    Content-Type: application/json; charset=utf-8
 
-Content-Type: application/json; charset=utf-8
-
-{"error": "The URI /invalid/uri was not recognized!"}
+    {"error": "The URI /invalid/uri was not recognized!"}
 
 Valid status codes are as follows (essentially identical to their meaning in traditional http):
 
-200 - Request okay, response follows. Return this when a valid lookup has occurred and response data should be considered valid, even in the case of no data available for the request.
-
-401 - Unauthorized token. Return this when the token is not provided, invalid or has been revoked.
-
-404 - Game/version combination unsupported. Return this when the requesting URI is valid but the server does not support this game/version, or when a valid object type is requested that isn’t supported by this server.
-
-405 - URI not allowed. Return this when an invalid URI or invalid method is requested.
-
-500 - Uncaught server error. Return this on unexpected server-side problems.
-
-501 - Unimplemented. Return this when a client requests a version of the API that the server does not support.
+* 200 - Request okay, response follows. Return this when a valid lookup has occurred and response data should be considered valid, even in the case of no data available for the request.
+* 401 - Unauthorized token. Return this when the token is not provided, invalid or has been revoked.
+* 404 - Game/version combination unsupported. Return this when the requesting URI is valid but the server does not support this game/version, or when a valid object type is requested that isn’t supported by this server.
+* 405 - URI not allowed. Return this when an invalid URI or invalid method is requested.
+* 500 - Uncaught server error. Return this on unexpected server-side problems.
+* 501 - Unimplemented. Return this when a client requests a version of the API that the server does not support.
 
 ## URI Structure
 
 The URI structure of the API will follow this format:
 
-/<protocol version>/<game series>/<game version>
+    /<protocol version>/<game series>/<game version>
 
 * Protocol Version - The version of this API spec the server conforms to. Currently this should be hardcoded to "v1". The purpose of this is to allow for non-backwards-compatible changes to the API in the future while not breaking existing clients.
-
 * Game Series - The series this request is for. This works in tandem with the game version below to specify a distinct set of objects to look up (such as valid songs).
-
 * Game Version - The version of the game this request is for. This depends on the game series being requested and is implied to be the final (latest) version of data for that particular game/version combo. Note that this is not an integer, even though in most cases it can be cast to one!
 
 Note that some servers support games that have had songs added back in via hacks, such as IIDX Omnimix. To request data from an omni version of a game, prepend the letter "o" to the version. Servers may treat this how they wish (they may wish to strip the leading o and return only info for the original game or return 404 in the instance they don’t support this version).
