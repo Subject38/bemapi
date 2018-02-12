@@ -206,15 +206,13 @@ While normal requests will follow the exact pattern above, special URIs document
 
 ### API Information URI
 
-/
+    /
 
 The API Information URI should return information about the server itself. The request JSON should be an empty object. The returned JSON object should contain the following attributes:
 
-* versions - A list of strings of supported protocol versions that this server supports. Right now, this should be a list of one string, "v1".
-
-* name - The name of the network that we are talking to. This can be displayed on the admin panel of a client or used in a basic query to verify functionality.
-
-* email – An administrative email used to contact the network if the need arises.
+* ``versions`` - A list of strings of supported protocol versions that this server supports. Right now, this should be a list of one string, "v1".
+* ``name`` - The name of the network that we are talking to. This can be displayed on the admin panel of a client or used in a basic query to verify functionality.
+* ``email`` – An administrative email used to contact the network if the need arises.
 
 # Supported Objects
 
