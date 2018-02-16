@@ -228,7 +228,8 @@ Aside from basics such as the points achieved, each game will have different att
 * ``song`` – The game identifier for the song this record belongs to as a string. May be version specific, so parsing it is up to the client based on the requested game/version.
 * ``chart`` – The game identifier for the chart this record belongs to as a string. May be version specific as above.
 * ``points`` – The number of points earned for this record as an integer. 
-* ``timestamp`` – The integer UTC unix timestamp when the record was earned/updated.
+* ``timestamp`` – The integer UTC unix timestamp when the record was earned.
+* ``updated`` – The integer UTC unix timestamp when the record was last updated. This includes incrementing the play count, even if everything else stays the same.
 * ``plays`` – The integer number of plays logged for this song/chart for the given ID.
 
 Given that a high score, once set, is immutable, records are easily cached on the client. For that reason, it is important that a new record earned on a server change the timestamp to the time that new record was earned. In that way, clients can request only records earned since a particular timestamp in order to download incremental changes since last fetch given a particular ID.
@@ -289,6 +290,8 @@ Note that in the case of IIDX, "points" above refers to the EX score earned on t
     * ``fc`` – Full combo.
 * ``ghost`` – List of integers in the range of 0-255, representing the bytes that the game sends for ghost steps for a song.
 * ``miss`` – The miss count, as an integer number of misses recorded for this record. If the miss count is not available for this song (such as the user failed out early), this should be -1. Otherwise, the valid range goes from 0 to the number of notes in the chart.
+* ``pgreat`` - The count of pgreats that the user earned for this particular record. If not available, this should be -1.
+* ``great`` - The count of greats that the user earned for this particular record. If not available, this should be -1.
 
 ### Jubeat Additional Attributes and Documentation
 
