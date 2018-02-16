@@ -2,7 +2,7 @@ import argparse
 import json
 import requests
 import sys
-from typing import Dict, List, Any
+from typing import Dict, List, Any, Optional
 
 class APIClient:
     API_VERSION = 'v1'
@@ -71,15 +71,20 @@ class APIClient:
         if idtype == 'server' and len(ids) != 0:
             raise Exception('Invalid number of IDs given!')
 
-    def records_exchange(self, game: str, version: str, idtype: str, ids: List[str]) -> None:
+    def records_exchange(self, game: str, version: str, idtype: str, ids: List[str], since: Optional[int], until: Optional[int]) -> None:
         self.__id_check(idtype, ids)
+        params = {
+            'ids': ids,
+            'type': idtype,
+            'objects': ['records'],
+        }  # type: Dict[str, Any]
+        if since is not None:
+            params['since'] = since
+        if until is not None:
+            params['until'] = until
         resp = self.exchange_data(
             '{}/{}/{}'.format(self.API_VERSION, game, version),
-            {
-                'ids': ids,
-                'type': idtype,
-                'objects': ['records'],
-            },
+            params,
         )
         print(json.dumps(resp['records'], indent=4))
 
@@ -110,6 +115,8 @@ def main():
     record_parser.add_argument('-g', '--game', type=str, required=True, help='The game we want to look records up for.')
     record_parser.add_argument('-v', '--version', type=str, required=True, help='The version we want to look records up for.')
     record_parser.add_argument('-t', '--type', type=str, required=True, choices=['card', 'song', 'server'], help='The type of ID used to look up records.')
+    record_parser.add_argument('-s', '--since', metavar='TIMESTAMP', default=None, type=int, help='Only load records updated since TIMESTAMP')
+    record_parser.add_argument('-u', '--until', metavar='TIMESTAMP', default=None, type=int, help='Only load records updated before TIMESTAMP')
     record_parser.add_argument('id', metavar='ID', nargs='*', type=str, help='The ID we will look up records for.')
 
     # Profile request
@@ -130,6 +137,8 @@ def main():
             args.version,
             args.type,
             args.id,
+            args.since,
+            args.until,
         )
     elif args.request == 'profile':
         client.profile_exchange(
