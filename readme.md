@@ -441,7 +441,7 @@ The following attributes should be returned (if available) by all profiles belon
 
 ### IIDX Additional Attributes and Documentation
 
-The following attributes should be returned (if available) by all profiles belonging to the DDR series.
+The following attributes should be returned (if available) by all profiles belonging to the IIDX series.
 
 * ``area`` - The integer prefecture code as set when creating a profile on IIDX. If unavailable, this should be set to -1.
 * ``qpro`` - An object representing the player's qpro, with the following attributes:
