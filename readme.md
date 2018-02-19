@@ -432,3 +432,43 @@ The profile request isn’t currently meant to allow instantiation of full game 
 * ``registered`` – The integer UTC unix timestamp of profile registration. If unavailable, this should be set to -1.
 * ``updated`` – The integer UTC unix timestamp of the last profile update. If unavailable, this should be set to -1.
 * ``plays`` – The integer total number of plays this user has logged using this profile.
+
+### DDR Additional Attributes and Documentation
+
+The following attributes should be returned (if available) by all profiles belonging to the DDR series.
+
+* ``area`` - The integer area code as set when creating a profile on DDR. If unavailable, this should be set to -1.
+
+### IIDX Additional Attributes and Documentation
+
+The following attributes should be returned (if available) by all profiles belonging to the DDR series.
+
+* ``area`` - The integer prefecture code as set when creating a profile on IIDX. If unavailable, this should be set to -1.
+* ``qpro`` - An object representing the player's qpro, with the following attributes:
+  * ``head`` - The integer representation of the game's current setting for qpro head. If unavailable, this should be set to -1.
+  * ``hair`` - The integer representation of the game's current setting for qpro hair. If unavailable, this should be set to -1.
+  * ``face`` - The integer representation of the game's current setting for qpro face. If unavailable, this should be set to -1.
+  * ``body`` - The integer representation of the game's current setting for qpro body. If unavailable, this should be set to -1.
+  * ``hand`` - The integer representation of the game's current setting for qpro hand. If unavailable, this should be set to -1.
+
+### Jubeat Additional Attributes and Documentation
+
+Currently Jubeat has no additional attributes that are recognized by the API.
+
+### Museca Additional Attribute and Documentation
+
+Currently Museca has no additional attributes that are recognized by the API.
+
+### Pop’n Music Additional Attributes and Documentation
+
+The following attributes should be returned (if available) by all profiles belonging to the Pop'n Music series.
+
+* ``character`` - The integer character code as set when creating a profile on Pop'n Music. If unavailable, this should be set to -1.
+
+### Reflec Beat Additional Attributes and Documentation
+
+Currently Reflec Beat has no additional attributes that are recognized by the API.
+
+### SDVX Additional Attributes and Documentation
+
+Currently SDVX has no additional attributes that are recognized by the API.
