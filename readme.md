@@ -42,7 +42,7 @@ Valid status codes are as follows (essentially identical to their meaning in tra
 
 * 200 - Request okay, response follows. Return this when a valid lookup has occurred and response data should be considered valid, even in the case of no data available for the request.
 * 401 - Unauthorized token. Return this when the token is not provided, invalid or has been revoked.
-* 404 - Game/version combination unsupported. Return this when the requesting URI is valid but the server does not support this game/version, or when a valid object type is requested that isn’t supported by this server.
+* 404 - Game/version combination unsupported. Return this when the requesting URI is valid but the server does not support this game/version, or when a valid object type is requested that isn't supported by this server.
 * 405 - URI not allowed. Return this when an invalid URI or invalid method is requested.
 * 500 - Uncaught server error. Return this on unexpected server-side problems.
 * 501 - Unimplemented. Return this when a client requests a version of the API that the server does not support.
@@ -57,7 +57,7 @@ The URI structure of the API will follow this format:
 * Game Series - The series this request is for. This works in tandem with the game version below to specify a distinct set of objects to look up (such as valid songs).
 * Game Version - The version of the game this request is for. This depends on the game series being requested and is implied to be the final (latest) version of data for that particular game/version combo. Note that this is not an integer, even though in most cases it can be cast to one!
 
-Note that some servers support games that have had songs added back in via hacks, such as IIDX Omnimix. To request data from an omni version of a game, prepend the letter "o" to the version. Servers may treat this how they wish (they may wish to strip the leading o and return only info for the original game or return 404 in the instance they don’t support this version).
+Note that some servers support games that have had songs added back in via hacks, such as IIDX Omnimix. To request data from an omni version of a game, prepend the letter "o" to the version. Servers may treat this how they wish (they may wish to strip the leading o and return only info for the original game or return 404 in the instance they don't support this version).
 
 ## Request/Response Format
 
@@ -176,12 +176,12 @@ Valid game series and their versions are as follows. Clients and servers should 
     * ``1`` - ノスタルジア
     * ``2`` - ノスタルジア FORTE
 * ``popnmusic``
-    * ``19`` - Pop’n Music Tune Street
-    * ``20`` - Pop’n Music Fantasia
-    * ``21`` - Pop’n Music Sunny Park
-    * ``22`` - Pop’n Music Lapistoria
-    * ``23`` - Pop’n Music Eclale
-    * ``24`` - Pop’n Music うさぎと猫と少年の夢
+    * ``19`` - Pop'n Music Tune Street
+    * ``20`` - Pop'n Music Fantasia
+    * ``21`` - Pop'n Music Sunny Park
+    * ``22`` - Pop'n Music Lapistoria
+    * ``23`` - Pop'n Music Eclale
+    * ``24`` - Pop'n Music うさぎと猫と少年の夢
 * ``reflecbeat``
     * ``1`` - REFLEC BEAT
     * ``2`` - REFLEC BEAT limelight
@@ -190,8 +190,8 @@ Valid game series and their versions are as follows. Clients and servers should 
     * ``3su`` - REFLEC BEAT colette -Summer-
     * ``3a`` - REFLEC BEAT colette -Autumn-
     * ``3as`` - REFLEC BEAT colette -All Seasons-
-    * ``4`` - REFLEC BEAT groovin’!!
-    * ``4u`` - REFLEC BEAT groovin’!! Upper
+    * ``4`` - REFLEC BEAT groovin'!!
+    * ``4u`` - REFLEC BEAT groovin'!! Upper
     * ``5`` - REFLEC BEAT VOLZZA
     * ``6`` - REFLEC BEAT VOLZZA 2
     * ``7`` - REFLEC BEAT 悠久のリフレシア
@@ -342,18 +342,18 @@ The following attributes should be returned (if available) for all records belon
 * ``longrate`` – The integer hold rate according to the game when this score was recorded.
 * ``volrate`` – The integer spin rate according to the game when this score was recorded.
 
-### Pop’n Music Additional Attributes and Documentation
+### Pop'n Music Additional Attributes and Documentation
 
-The following chart types are recognized by Pop’n Music Fantasia and above:
+The following chart types are recognized by Pop'n Music Fantasia and above:
 
 * ``0`` – Easy chart
 * ``1`` – Normal chart
 * ``2`` – Hyper chart
 * ``3`` – EX chart
 
-Pop’n Music Tune Street only had ‘cool’ timing for a particular mode (Cho Challenge mode), and thus only those scores are compatible going forward. The charts that were available in this mode are the "normal", "hyper" and "EX" chart types. Easy charts were not available, so scores should not be loaded for easy charts for Tune Street.
+Pop'n Music Tune Street only had 'cool' timing for a particular mode (Cho Challenge mode), and thus only those scores are compatible going forward. The charts that were available in this mode are the "normal", "hyper" and "EX" chart types. Easy charts were not available, so scores should not be loaded for easy charts for Tune Street.
 
-The following attributes should be returned (if available) for records belonging to the Pop’n Music series:
+The following attributes should be returned (if available) for records belonging to the Pop'n Music series:
 
 * ``status`` – The clear status when this record was earned, as a string enum. Valid values are as follows:
     * ``cf`` – Failed, circle marker.
@@ -371,7 +371,7 @@ The following attributes should be returned (if available) for records belonging
 
 ### Reflec Beat Additional Attributes and Documentation
 
-The following charts are recognized by Reflec Beat series. Note that special/white hard charts do not appear at all in some older series, so they shouldn’t be returned when requesting records for older games.
+The following charts are recognized by Reflec Beat series. Note that special/white hard charts do not appear at all in some older series, so they shouldn't be returned when requesting records for older games.
 
 * ``0`` – Basic
 * ``1`` – Medium
@@ -394,7 +394,7 @@ The following attributes should be returned (if available) for any record belong
     * ``ac`` – Almost combo. The user was close to a full combo but missed by up to two.
     * ``fc`` – Full combo.
     * ``fcaj`` – Full combo all just reflec. The user was able to full combo the song, and on top of that execute the maximum number of just reflecs available in the song.
-* ``miss`` – The miss count earned during this song, as an integer. If this is not available (the user earned this song in a mode that doesn’t count misses, for instance), this should be set to -1.
+* ``miss`` – The miss count earned during this song, as an integer. If this is not available (the user earned this song in a mode that doesn't count misses, for instance), this should be set to -1.
 * ``combo`` – The combo earned during this song as an integer.
 
 ### SDVX Additional Attributes and Documentation
@@ -413,7 +413,7 @@ The following attributes should be returned (if available) by all records belong
     * ``np`` – No play/no clear, such as when playing during a mode that does not give you credit for clears but still saves scores (such as skill analyzer).
     * ``cleared`` – User cleared the chart for this record.
     * ``hc`` - User hard cleared the chart for this record.
-    * ``uc`` – User full combo’d the chart (ultimate chain) for this record.
+    * ``uc`` – User full combo'd the chart (ultimate chain) for this record.
     * ``puc`` – User perfected the chart (perfect ultimate chain) for this record.
 * ``rank`` – The clear rank that was earned by the user for this record, as a string enum. Valid values are as follows: "E" (failed, no play), "D", "C", "B", "A", "A+", "AA", "AA+", "AAA", "AAA+" and "S".
 * ``combo`` – The maximum combo earned by the user for this record as an integer.
@@ -440,11 +440,11 @@ For the "card" and "instance" ID types the statistics objects should each contai
 
 ## Profile
 
-Identified by the "profile" object type, this pulls up basic profile information for users. For "card", it pulls up the profile for the game associated with the user that owns the card. The version requested should be preferred, but if no profile exists for that exact game/version a compatible profile for another version of the game should be returned. When multiple card IDs are presented, it pulls up the profile for the user associated with each card. In the case that the user does not exist, an empty list should be returned to represent that the user does not have any profile on this network for this game. If a client is looking up multiple profiles and some are present and others are not, the returned list of profiles should only include present profiles. The client can determine that the profile for a user doesn’t exist by the absence of a profile object for that card in the return. For "song" and "instance", a 405 error code should be returned to specify that this is a nonsense request. For "server", it pulls up the profile for each user that the server recognizes for that game/version. Exact matches should be returned only.
+Identified by the "profile" object type, this pulls up basic profile information for users. For "card", it pulls up the profile for the game associated with the user that owns the card. The version requested should be preferred, but if no profile exists for that exact game/version a compatible profile for another version of the game should be returned. When multiple card IDs are presented, it pulls up the profile for the user associated with each card. In the case that the user does not exist, an empty list should be returned to represent that the user does not have any profile on this network for this game. If a client is looking up multiple profiles and some are present and others are not, the returned list of profiles should only include present profiles. The client can determine that the profile for a user doesn't exist by the absence of a profile object for that card in the return. For "song" and "instance", a 405 error code should be returned to specify that this is a nonsense request. For "server", it pulls up the profile for each user that the server recognizes for that game/version. Exact matches should be returned only.
 
-The profile request isn’t currently meant to allow instantiation of full game profiles across different networks. Instead, it is provided as a way to look up in-game name and statistic information based on card ID so networks can present global scores or allow server-server rivals if desired. Given the amount of information in the profile return for each user, a server may also wish to present to the user a profile migration screen as if the user was coming from an older version of the game. In this way, the name on the profile can be pre-filled from another network as a convenience. The response to the profile request should be a JSON object with a "profile" attribute. The "profile" attribute should be a list of zero or more profile objects that fit the criteria of the object type. Each profile object should have the following attributes at minimum:
+The profile request isn't currently meant to allow instantiation of full game profiles across different networks. Instead, it is provided as a way to look up in-game name and statistic information based on card ID so networks can present global scores or allow server-server rivals if desired. Given the amount of information in the profile return for each user, a server may also wish to present to the user a profile migration screen as if the user was coming from an older version of the game. In this way, the name on the profile can be pre-filled from another network as a convenience. The response to the profile request should be a JSON object with a "profile" attribute. The "profile" attribute should be a list of zero or more profile objects that fit the criteria of the object type. Each profile object should have the following attributes at minimum:
 
-* ``card`` – The 16 character card ID identifying this user as a string. In the case that a user has multiple cards associated with an account, the card ID used to request this user’s profile should be returned.
+* ``card`` – The 16 character card ID identifying this user as a string. In the case that a user has multiple cards associated with an account, the card ID used to request this user's profile should be returned.
 * ``name`` – The name associated with the profile, as a string.
 * ``registered`` – The integer UTC unix timestamp of profile registration. If unavailable, this should be set to -1.
 * ``updated`` – The integer UTC unix timestamp of the last profile update. If unavailable, this should be set to -1.
@@ -479,7 +479,7 @@ Currently Jubeat has no additional attributes that are recognized by the API.
 
 Currently Museca has no additional attributes that are recognized by the API.
 
-### Pop’n Music Additional Attributes and Documentation
+### Pop'n Music Additional Attributes and Documentation
 
 The following attributes should be returned (if available) by all profiles belonging to the Pop'n Music series.
 
