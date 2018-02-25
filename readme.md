@@ -336,7 +336,7 @@ The following attributes should be returned (if available) for all records belon
     * ``excellent`` - 優
     * ``superb`` - 秀
     * ``masterpiece`` - 傑
-    * ``perfect`` - 傑 (Identical to superb kanji but shows up gold in-game).
+    * ``perfect`` - 傑 (Identical to masterpiece kanji but shows up gold in-game).
 * ``combo`` - The maximum combo earned when earning this record as an integer.
 * ``buttonrate`` – The integer button rate according to the game when this score was recorded.
 * ``longrate`` – The integer hold rate according to the game when this score was recorded.
