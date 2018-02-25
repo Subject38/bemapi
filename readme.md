@@ -431,7 +431,7 @@ The profile request isn’t currently meant to allow instantiation of full game 
 * ``name`` – The name associated with the profile, as a string.
 * ``registered`` – The integer UTC unix timestamp of profile registration. If unavailable, this should be set to -1.
 * ``updated`` – The integer UTC unix timestamp of the last profile update. If unavailable, this should be set to -1.
-* ``plays`` – The integer total number of plays this user has logged using this profile.
+* ``plays`` – The integer total number of plays this user has logged using this profile. If unavailable, this should be set to -1.
 * ``match`` - A string enum representing whether this profile was an exact match or a partial match. Valid values are as follows:
    * ``exact`` - This profile is for the requested game/version. Additional attributes specified below are for this game/version.
    * ``partial`` - This profile is for the requested game, but a different version. If the server is capable of doing so, additional attributes should be converted for corret consumption for the game/version requested by the client. If it is not possible, they should be set to -1 to indicate they are not available for the requested game/version.
