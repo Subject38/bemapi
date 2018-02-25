@@ -62,11 +62,13 @@ class APIClient:
         print('Server supported versions: {}'.format(', '.join(resp['versions'])))
 
     def __id_check(self, idtype: str, ids: List[str]) -> None:
-        if idtype not in ['card', 'song', 'server']:
+        if idtype not in ['card', 'song', 'instance', 'server']:
             raise Exception('Invalid ID type provided!')
-        if idtype == 'card' and len(ids)== 0:
+        if idtype == 'card' and len(ids) == 0:
             raise Exception('Invalid number of IDs given!')
         if idtype == 'song' and len(ids) not in [1, 2]:
+            raise Exception('Invalid number of IDs given!')
+        if idtype == 'instance' and len(ids) != 3:
             raise Exception('Invalid number of IDs given!')
         if idtype == 'server' and len(ids) != 0:
             raise Exception('Invalid number of IDs given!')
@@ -114,7 +116,7 @@ def main():
     record_parser = subparser.add_parser('records')
     record_parser.add_argument('-g', '--game', type=str, required=True, help='The game we want to look records up for.')
     record_parser.add_argument('-v', '--version', type=str, required=True, help='The version we want to look records up for.')
-    record_parser.add_argument('-t', '--type', type=str, required=True, choices=['card', 'song', 'server'], help='The type of ID used to look up records.')
+    record_parser.add_argument('-t', '--type', type=str, required=True, choices=['card', 'song', 'instance', 'server'], help='The type of ID used to look up records.')
     record_parser.add_argument('-s', '--since', metavar='TIMESTAMP', default=None, type=int, help='Only load records updated since TIMESTAMP')
     record_parser.add_argument('-u', '--until', metavar='TIMESTAMP', default=None, type=int, help='Only load records updated before TIMESTAMP')
     record_parser.add_argument('id', metavar='ID', nargs='*', type=str, help='The ID we will look up records for.')
