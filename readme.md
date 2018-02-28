@@ -484,7 +484,7 @@ The following attributes should be returned (if available) by all profiles belon
 
 ### Reflec Beat Additional Attributes and Documentation
 
-Currently Reflec Beat has no additional attributes that are recognized by the API.
+* ``icon`` - The integer icon as set when creating or updating a Reflec Beat profile. If unavailable, this should be set to -1.
 
 ### SDVX Additional Attributes and Documentation
 
