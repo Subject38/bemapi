@@ -225,7 +225,7 @@ Identified by the "records" object type, this pulls up high scores based on the 
 
 Aside from basics such as the points achieved, each game will have different attributes required, as documented in game-specific sections below. The response to the records request should be a JSON object with a "records" attribute. The "records" attribute should be a list of zero or more record objects that fit the criteria of the object type. Each record object should have the following attributes at minimum:
 
-* ``card`` – The 16 character card ID identifying this user as a string. In the case that a user has multiple cards associated with an account, the card ID used to request records from the user should be returned. For 'song' and 'server' ID lookups, this should return the first card registered to the account.
+* ``cards`` – A list of 16 character card ID strings associated with the user that owns this record. In many cases, there will be the single card ID that identifies a user on this server. In the case that a user has multiple cards associated with an account, each card ID should be returned. In the case of an anonymous score, this list should be empty.
 * ``song`` – The game identifier for the song this record belongs to as a string. May be version specific, so parsing it is up to the client based on the requested game/version.
 * ``chart`` – The game identifier for the chart this record belongs to as a string. May be version specific as above.
 * ``points`` – The number of points earned for this record as an integer. 
@@ -427,6 +427,7 @@ Identified by the "statistics" object type, this pulls up play statistics about 
 
 The response to the statistics request should be a JSON object with a "statistics" attribute. The "statistics" attribute should be a list of zero or more statistics objects that fit the criteria of the object type. Each statistics object should have the following attributes at minimum:
 
+* ``cards`` – A list of 16 character card ID strings associated with the user these statistics are for. In the case of "song" and "server" request ID types, this should be an empty list since the statistics are aggregated across multiple users.
 * ``song`` – The game identifier for the song these play stats belong to as a string. May be version specific, so parsing it is up to the client based on the requested game/version.
 * ``chart`` – The game identifier for the chart these play stats belong to as a string. May be version specific as above.
 * ``updated`` – The integer UTC unix timestamp when the play stats were last updated.
@@ -434,17 +435,13 @@ The response to the statistics request should be a JSON object with a "statistic
 * ``clears`` – The integer number of clears logged for this song/chart for the given ID. If unavailable, this should be set to -1.
 * ``combos`` – The integer number of full combos logged for this song/chart for the given ID. If unavailable, this should be set to -1.
 
-For the "card" and "instance" ID types the statistics objects should each contain the following additional attributes:
-
-* ``card`` – The 16 character card ID identifying this user as a string. In the case that a user has multiple cards associated with an account, the card ID used to request statistics from the user should be returned.
-
 ## Profile
 
 Identified by the "profile" object type, this pulls up basic profile information for users. For "card", it pulls up the profile for the game associated with the user that owns the card. The version requested should be preferred, but if no profile exists for that exact game/version a compatible profile for another version of the game should be returned. When multiple card IDs are presented, it pulls up the profile for the user associated with each card. In the case that the user does not exist, an empty list should be returned to represent that the user does not have any profile on this network for this game. If a client is looking up multiple profiles and some are present and others are not, the returned list of profiles should only include present profiles. The client can determine that the profile for a user doesn't exist by the absence of a profile object for that card in the return. For "song" and "instance", a 405 error code should be returned to specify that this is a nonsense request. For "server", it pulls up the profile for each user that the server recognizes for that game/version. Exact matches should be returned only.
 
 The profile request isn't currently meant to allow instantiation of full game profiles across different networks. Instead, it is provided as a way to look up in-game name and statistic information based on card ID so networks can present global scores or allow server-server rivals if desired. Given the amount of information in the profile return for each user, a server may also wish to present to the user a profile migration screen as if the user was coming from an older version of the game. In this way, the name on the profile can be pre-filled from another network as a convenience. The response to the profile request should be a JSON object with a "profile" attribute. The "profile" attribute should be a list of zero or more profile objects that fit the criteria of the object type. Each profile object should have the following attributes at minimum:
 
-* ``card`` – The 16 character card ID identifying this user as a string. In the case that a user has multiple cards associated with an account, the card ID used to request this user's profile should be returned.
+* ``cards`` – A list of 16 character card ID strings associated with the user that owns this profile. In many cases, there will be the single card ID that identifies a user on this server. In the case that a user has multiple cards associated with an account, each card ID should be returned. If this profile is anonymous, this list should be empty.
 * ``name`` – The name associated with the profile, as a string.
 * ``registered`` – The integer UTC unix timestamp of profile registration. If unavailable, this should be set to -1.
 * ``updated`` – The integer UTC unix timestamp of the last profile update. If unavailable, this should be set to -1.
