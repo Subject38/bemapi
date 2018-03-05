@@ -2,8 +2,8 @@ import argparse
 import copy
 import json
 import traceback
-from typing import Callable, Dict, Any, Optional, List
-from flask import Flask, abort, request, Response, got_request_exception, g  # type: ignore
+from typing import Callable, Dict, Any, List
+from flask import Flask, abort, request, Response, g  # type: ignore
 from functools import wraps
 
 app = Flask(
@@ -12,8 +12,10 @@ app = Flask(
 
 SUPPORTED_VERSIONS = ['v1']
 
+
 class APIException(Exception):
     pass
+
 
 class BaseObject:
 
@@ -51,6 +53,7 @@ def jsonify_response(data: Dict[str, Any], code: int=200) -> Response:
         status=code,
     )
 
+
 @app.before_request
 def before_request() -> None:
     g.authorized = False
@@ -66,6 +69,7 @@ def before_request() -> None:
         if authtype.lower() == 'token':
             g.authorized = authtoken == "dummy_token"
 
+
 def authrequired(func: Callable) -> Callable:
     @wraps(func)
     def decoratedfunction(*args: Any, **kwargs: Any) -> Response:
@@ -78,11 +82,13 @@ def authrequired(func: Callable) -> Callable:
             return func(*args, **kwargs)
     return decoratedfunction
 
+
 def jsonify(func: Callable) -> Callable:
     @wraps(func)
     def decoratedfunction(*args: Any, **kwargs: Any) -> Response:
         return jsonify_response(func(*args, **kwargs))
     return decoratedfunction
+
 
 @app.errorhandler(Exception)
 def server_exception(exception: Any) -> Response:
@@ -94,12 +100,14 @@ def server_exception(exception: Any) -> Response:
         500,
     )
 
+
 @app.errorhandler(APIException)
 def api_exception(exception: Any) -> Response:
     return jsonify_response(
         {'error': exception.message},
         exception.code,
     )
+
 
 @app.errorhandler(500)
 def server_error(error: Any) -> Response:
@@ -108,12 +116,14 @@ def server_error(error: Any) -> Response:
         500,
     )
 
+
 @app.errorhandler(501)
 def protocol_error(error: Any) -> Response:
     return jsonify_response(
         {'error': 'Unsupported protocol version in request.'},
         501,
     )
+
 
 @app.errorhandler(400)
 def bad_json(error: Any) -> Response:
@@ -122,12 +132,14 @@ def bad_json(error: Any) -> Response:
         500,
     )
 
+
 @app.errorhandler(404)
 def unrecognized_object(error: Any) -> Response:
     return jsonify_response(
         {'error': 'Unrecognized request game/version or object.'},
         404,
     )
+
 
 @app.errorhandler(405)
 def invalid_request(error: Any) -> Response:
@@ -136,10 +148,12 @@ def invalid_request(error: Any) -> Response:
         405,
     )
 
+
 @app.route('/<path:path>', methods=['GET', 'POST'])
 @authrequired
 def catch_all(path: str) -> Response:
     abort(405)
+
 
 @app.route('/', methods=['GET', 'POST'])
 @authrequired
@@ -156,6 +170,7 @@ def info() -> Dict[str, Any]:
         'name': 'Sample e-AMUSEMENT Server',
         'email': 'nobody@nowhere.com',
     }
+
 
 @app.route('/<protoversion>/<requestgame>/<requestversion>', methods=['GET', 'POST'])
 @authrequired

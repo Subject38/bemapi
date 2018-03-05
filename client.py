@@ -4,6 +4,7 @@ import requests
 import sys
 from typing import Dict, List, Any, Optional
 
+
 class APIClient:
     API_VERSION = 'v1'
 
@@ -53,7 +54,7 @@ class APIClient:
             raise Exception('The server had an error processing the request and returned \'{}\''.format(error))
         if r.status_code == 501:
             raise Exception('The server does not support this version of the API!')
-        raise Exception('The server returned an invalid status code {}!',format(r.status_code))
+        raise Exception('The server returned an invalid status code {}!'.format(r.status_code))
 
     def info_exchange(self) -> None:
         resp = self.exchange_data('', {})
@@ -114,6 +115,7 @@ class APIClient:
         )
         print(json.dumps(resp['statistics'], indent=4))
 
+
 def main():
     # Global arguments
     parser = argparse.ArgumentParser(description='A sample API client for an e-AMUSEMENT API provider.')
@@ -122,7 +124,7 @@ def main():
     subparser = parser.add_subparsers(dest='request')
 
     # Info request
-    info_parser = subparser.add_parser('info')
+    subparser.add_parser('info')
 
     # Score request
     record_parser = subparser.add_parser('records')
