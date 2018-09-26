@@ -193,8 +193,8 @@ Valid game series and their versions are as follows. Clients and servers should 
     * ``4`` - REFLEC BEAT groovin'!!
     * ``4u`` - REFLEC BEAT groovin'!! Upper
     * ``5`` - REFLEC BEAT VOLZZA
-    * ``6`` - REFLEC BEAT VOLZZA 2
-    * ``7`` - REFLEC BEAT 悠久のリフレシア
+    * ``5a`` - REFLEC BEAT VOLZZA 2
+    * ``6`` - REFLEC BEAT 悠久のリフレシア
 * ``soundvoltex``
     * ``1`` - Sound Voltex BOOTH
     * ``2`` - Sound Voltex II Infinite Infection
