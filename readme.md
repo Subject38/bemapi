@@ -309,7 +309,7 @@ The following attributes should be returned (if available) for records belonging
     * ``nfc`` – Nearly full combo. The user got almost a full combo.
     * ``fc`` – Full combo.
     * ``nec`` – Nearly excellent combo. The user got close to perfect on each note.
-    * ``ec`` – Excellent combo. The user earned an excellent on every note.
+    * ``exc`` – Excellent combo. The user earned an excellent on every note.
 * ``combo`` – Integer specifying the maximum combo earned when the user earned the record.
 * ``ghost`` – List of integers representing the ghost data sent by the game for this record.
 
