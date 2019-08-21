@@ -411,6 +411,7 @@ The following attributes should be returned (if available) by all records belong
 
 * ``status`` – The clear status of this record, as a string enum. Valid values are as follows:
     * ``np`` – No play/no clear, such as when playing during a mode that does not give you credit for clears but still saves scores (such as skill analyzer).
+    * ``failed`` – User played and failed the chart for this record.
     * ``cleared`` – User cleared the chart for this record.
     * ``hc`` - User hard cleared the chart for this record.
     * ``uc`` – User full combo'd the chart (ultimate chain) for this record.
