@@ -116,6 +116,17 @@ class APIClient:
         )
         print(json.dumps(resp['statistics'], indent=4))
 
+    def catalog_exchange(self, game: str, version: str) -> None:
+        resp = self.exchange_data(
+            '{}/{}/{}'.format(self.API_VERSION, game, version),
+            {
+                'ids': [],
+                'type': 'server',
+                'objects': ['catalog'],
+            },
+        )
+        print(json.dumps(resp['catalog'], indent=4))
+
 
 def main():
     # Global arguments
@@ -150,6 +161,11 @@ def main():
     statistic_parser.add_argument('-t', '--type', type=str, required=True, choices=['card', 'song', 'instance', 'server'], help='The type of ID used to look up statistics.')
     statistic_parser.add_argument('id', metavar='ID', nargs='*', type=str, help='The ID we will look up statistics for.')
 
+    # Catalog request
+    catalog_parser = subparser.add_parser('catalog')
+    catalog_parser.add_argument('-g', '--game', type=str, required=True, help='The game we want to look catalog entries up for.')
+    catalog_parser.add_argument('-v', '--version', type=str, required=True, help='The version we want to look catalog entries up for.')
+
     # Grab args
     args = parser.parse_args()
     client = APIClient(args.base, args.token)
@@ -178,8 +194,14 @@ def main():
             args.type,
             args.id,
         )
+    elif args.request == 'catalog':
+        client.catalog_exchange(
+            args.game,
+            args.version,
+        )
     else:
         raise Exception('Invalid request type {}!'.format(args.request))
+
 
 if __name__ == '__main__':
     try:

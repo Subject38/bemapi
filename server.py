@@ -47,6 +47,12 @@ class ProfileObject(BaseObject):
         return []
 
 
+class CatalogObject(BaseObject):
+
+    def fetch_v1(self, idtype: str, ids: List[str], params: Dict[str, Any]) -> Any:
+        return {'songs': []}
+
+
 def jsonify_response(data: Dict[str, Any], code: int=200) -> Response:
     return Response(
         json.dumps(data).encode('utf8'),
@@ -64,8 +70,8 @@ def before_request() -> None:
         try:
             authtype, authtoken = authkey.split(' ', 1)
         except ValueError:
-            authtype = None
-            authtoken = None
+            authtype = "invalid"
+            authtoken = "invalid"
 
         if authtype.lower() == 'token':
             g.authorized = authtoken == "dummy_token"
@@ -219,6 +225,7 @@ def lookup(protoversion: str, requestgame: str, requestversion: str) -> Dict[str
             'records': RecordsObject,
             'profile': ProfileObject,
             'statistics': StatisticsObject,
+            'catalog': CatalogObject,
         }.get(obj)
         if handler is None:
             # Don't support this object type

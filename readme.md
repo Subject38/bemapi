@@ -490,3 +490,95 @@ The following attributes should be returned (if available) by all profiles belon
 ### SDVX Additional Attributes and Documentation
 
 Currently SDVX has no additional attributes that are recognized by the API.
+
+## Catalog
+
+Identified by the "catalog" object type, this pulls up the complete item catalog for the requested game/version. Under most circumstances this will be limited to the song catalog, but some games require additional objects such as purchasable cards, items or unlockable characters. The only valid request to this object type uses the `server` ID type. Any request to the catalog object with any `card`, `song` or `instance` ID should return a 405 error code.
+
+The response to the catalog request should be a JSON object with a "catalog" attribute. The "catalog" attribute should be a object, containing at least the "songs" attribute. It may optionally include other, game-specific item types as documented below. For each attribute in the catalog dictionary, there should be a list of objects that conform to that item's type. Each of these types is documented in game-specific sections below. For games that specify extra object types in the catalog response, if these attributes are not available an empty list should be returned. The same goes for the songs item type as well. If songs are not available for a supported game/version, an empty list should be returned. If a game/version combination is entirely unspported by a server, a 404 response should be returned. Only valid object entries should be returned for any catalog object type. For instance, if a game allows four different charts per song but a particular song only has two charts, song objects should only be returned for the two charts that actually exist.
+
+Each song object found in the "songs" list should at minimum contain the following attributes:
+
+* ``song`` - A string specifing the song ID. This is the ID for that song according to that game and version. A song may have a different ID depending on the version of a game for various reasons (for instance: often songs get renumbered). For a given song, this ID should match the ID returned in the "records" or "statistics" object type for records associated with this song if queried with the same game and version. Given a game and version, the ID and chart together make a unique key that allows you to look up song information for a particular record.
+* ``chart`` - A string specifying the song chart. This, like the above ID, is game-specific. For a given song, this string should match the chart returned in the "records" or "statistics" object type for records associated with this song if queried with the same game and version. Given a game and version, the ID and chart together make a unique key that allows you to look up song information for a particular record.
+* ``title`` - A string specifying the song's title. If this is unavailable for this song, a blank string should be returned.
+* ``artist`` - A string specifying the song's artist. If this is unavailable for this song, a blank string should be returned.
+* ``genre`` - A string specifying the song's genre. If this is unavailable for this song, a blank string should be returned.
+
+### DDR Additional Attributes and Documentation
+
+The following attributes should be returned (if available) for all songs belonging to the DDR series.
+
+* ``editid`` - A string representing the edit ID for the song.
+* ``difficulty`` - An integer representing the in-game difficulty for the song.
+* ``bpm_min`` - An integer representing the minimum BPM of the song.
+* ``bpm_max`` - An integer representing the maximum BPM of the song.
+* ``category`` - A string specifying the song's folder/category. This should be a number specifying the version of the game this song comes from.
+* ``groove`` - An object representing the groove stats for this particular song. This object should hold the following attributes:
+  * ``voltage`` - An integer specifying the voltage of this song.
+  * ``stream`` - An integer specifying the stream of this song.
+  * ``air`` - An integer specifying the air of this song.
+  * ``chaos`` - An integer specifying the chaos of this song.
+  * ``freeze`` - An integer specifying the freeze of this song.
+
+### IIDX Additional Attributes and Documentation
+
+The following attributes should be returned (if available) for all songs belonging to the IIDX series.
+
+* ``difficulty`` - An integer representing the in-game difficulty for the song.
+* ``bpm_min`` - An integer representing the minimum BPM of the song.
+* ``bpm_max`` - An integer representing the maximum BPM of the song.
+* ``notecount`` - An integer count of the number of notes in the song. This should equal one half the EX score of a 100% (MAX-0) playthrough of the song.
+
+### Jubeat Additional Attributes and Documentation
+
+The following attributes should be returned (if available) for all songs belonging to the Jubeat series.
+
+* ``difficulty`` - An integer representing the in-game difficulty for the song.
+* ``bpm_min`` - An integer representing the minimum BPM of the song.
+* ``bpm_max`` - An integer representing the maximum BPM of the song.
+
+### Museca Additional Attribute and Documentation
+
+The following attributes should be returned (if available) for all songs belonging to the Museca series.
+
+* ``difficulty`` - An integer representing the in-game difficulty for the song.
+* ``bpm_min`` - An integer representing the minimum BPM of the song.
+* ``bpm_max`` - An integer representing the maximum BPM of the song.
+* ``limited`` - An integer specifying the limited value of this song, used for determining whether a song is locked, unlocked or purchaseable.
+
+### Pop'n Music Additional Attributes and Documentation
+
+The following attributes should be returned (if available) for all songs belonging to the Pop'n Music series.
+
+* ``category`` - A string specifying the song's folder/category. This should be a number specifying the version of the game this song comes from.
+* ``difficulty`` - An integer representing the in-game difficulty for the song.
+
+### Reflec Beat Additional Attributes and Documentation
+
+The following attributes should be returned (if available) for all songs belonging to the Reflec Beat series.
+
+* ``category`` - A string specifying the song's folder/category. This should be a number specifying the version of the game this song comes from.
+* ``difficulty`` - An integer representing the in-game difficulty for the song.
+* ``musicid`` - A four-character string specifying the music filename prefix for the song.
+
+### SDVX Additional Attributes and Documentation
+
+The following attributes should be returned (if available) for all songs belonging to the SDVX series.
+
+* ``difficulty`` - An integer representing the in-game difficulty for the song.
+* ``bpm_min`` - An integer representing the minimum BPM of the song.
+* ``bpm_max`` - An integer representing the maximum BPM of the song.
+* ``limited`` - An integer specifying the limited value of this song, used for determining whether a song is locked, unlocked or purchaseable.
+
+SDVX also has several other required catalog entries. Namely, for SDVX 1 purchaseable unlocks to work, the purchase catalog must be present. Also, for SDVX 2 and above, the appeal card catalog must be present in order to track and allow purchases. For SDVX 1, the "purchases" attribute should be present inside the catalog object and should be a list of objects containing the following values:
+
+* ``catalogid`` - A string representing this catalog entry's ID according to the game.
+* ``song`` - A string pointing at a particular song as documented above. Together with the chart, this provides a unique key to looking up a song which is to be purchased.
+* ``chart`` - A string pointing at a particular chart as documented above. Together with the song, this provides a unique key to looking up a song which is to be purchased.
+* ``price`` - An integer representing the number of blocks required to purchase this song in-game.
+
+For SDVX 2 and above, appeal cards are introduced. For appeal card purchases to work, the appeal card catalog must be present. The "appealcards" attribute should be present inside the catalog object and should be a list of objects containing the following values:
+
+* ``appealid`` - A string representing this card's ID according to the game.
+* ``description`` - A string representing this card's description according to the game.
