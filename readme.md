@@ -538,6 +538,15 @@ The following attributes should be returned (if available) for all songs belongi
 * ``bpm_min`` - An integer representing the minimum BPM of the song.
 * ``bpm_max`` - An integer representing the maximum BPM of the song.
 
+Jubeat also requires the emblems catalog. For Jubeat Prop and above, the "emblems" attribute should be present inside the catalog object and should be a list of objects containing the following values:
+
+* ``index`` - A string representing this emblem' entry's index according to the game.
+* ``song`` - A string pointing at a particular song as documented above.
+* ``layer`` - An integer representing the layer (1-5) where this emblem resides.
+* ``evolved`` - An integer representing the emblem's in-game evolved level.
+* ``rarity`` - An integer representing the rarity (1-5) of the emblem represented by this object.
+* ``name`` - A string representing the text-printable name of this emblem.
+
 ### Museca Additional Attribute and Documentation
 
 The following attributes should be returned (if available) for all songs belonging to the Museca series.
