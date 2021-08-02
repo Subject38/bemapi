@@ -156,6 +156,9 @@ Valid game series and their versions are as follows. Clients and servers should 
     * ``23`` - IIDX 23 copula
     * ``24`` - IIDX 24 SINOBUZ
     * ``25`` - IIDX 25 CANNON BALLERS
+    * ``26`` - IIDX 26 ROOTAGE
+    * ``27`` - IIDX 27 HEROIC VERSE
+    * ``28`` - IIDX 28 BISTROVER
 * ``jubeat``
     * ``1`` - Jubeat
     * ``2`` - Jubeat Ripples
@@ -276,6 +279,9 @@ Valid charts for IIDX according to the game are as follows:
 * ``4`` – Hyper 14key
 * ``5`` – Another 14key
 * ``6`` – Beginner 7key
+* ``7`` - Leggendaria 7key
+* ``8`` - Beginner 14key
+* ``9`` - Leggendaria 14key
 
 Note that in the case of IIDX, "points" above refers to the EX score earned on the song. This is calculated as 2 ✕ pgreats + greats. The following attributes should be returned (if available) for records belonging to the IIDX series.
 
@@ -529,6 +535,13 @@ The following attributes should be returned (if available) for all songs belongi
 * ``bpm_min`` - An integer representing the minimum BPM of the song.
 * ``bpm_max`` - An integer representing the maximum BPM of the song.
 * ``notecount`` - An integer count of the number of notes in the song. This should equal one half the EX score of a 100% (MAX-0) playthrough of the song.
+
+In order to support qpro selecting in the profile, IIDX has a qpro catalog. For every supported IIDX version, the "qpros" attribute should be present inside the catalog object and should be a list of objects containing the following values:
+
+* ``identifier`` - A string representing a stripped down filename for the underlying qpro texture. Useful for if qpro preview is implemented.
+* ``id`` - A string representing the index of the qpro according to the game.
+* ``name`` - A string representing the name of the qpro according to the game
+* ``type`` - A string representing the type of qpro part this is for. Can be any of: body, face, hair, hand, or head.
 
 ### Jubeat Additional Attributes and Documentation
 
